@@ -21,8 +21,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         getSupportActionBar().hide();
-        logo_icon = (ImageView) findViewById(R.id.logo_icon);
-        logo_text = (ImageView) findViewById(R.id.logo_text);
+        logo_icon = findViewById(R.id.logo_icon);
+        logo_text = findViewById(R.id.logo_text);
     }
 
     @Override

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_garage">
+
+    <fragment
+        android:id="@+id/navigation_fuel"
+        android:name="com.example.gad_af_project.ui.fuel.FuelFragment"
+        android:label="@string/title_fuel"
+        tools:layout="@layout/fragment_fuel" />
+
+    <fragment
+        android:id="@+id/navigation_garage"
+        android:name="com.example.gad_af_project.ui.garage.GarageFragment"
+        android:label="@string/title_garage"
+        tools:layout="@layout/fragment_garage" />
+
+    <fragment
+        android:id="@+id/navigation_events"
+        android:name="com.example.gad_af_project.ui.events.EventsFragment"
+        android:label="@string/title_events"
+        tools:layout="@layout/fragment_events" />
+</navigation>
