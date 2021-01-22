@@ -1,6 +1,8 @@
 package com.example.gad_af_project.vehicles;
 
-public class Vehicle{
+import java.io.Serializable;
+
+public class Vehicle implements Serializable {
 
     private String plate_number;
     private String vin;

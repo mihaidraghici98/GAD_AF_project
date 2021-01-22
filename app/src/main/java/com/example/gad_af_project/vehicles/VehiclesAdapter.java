@@ -17,18 +17,19 @@ import java.util.ArrayList;
 
 public class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.VehiclesViewHolder>{
 
-
     private final ArrayList<Vehicle> mDataSet;
+    private VehiclesViewHolder.OnVehicleListener mOnVehicleListener;
 
-    public VehiclesAdapter(ArrayList<Vehicle> vehicles_list){
+    public VehiclesAdapter(ArrayList<Vehicle> vehicles_list, VehiclesViewHolder.OnVehicleListener onVehicleListener){
         mDataSet = vehicles_list;
+        this.mOnVehicleListener = onVehicleListener;
     }
 
     @NonNull
     @Override
     public VehiclesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         RelativeLayout view = (RelativeLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_vehicle, parent, false);
-        return new VehiclesViewHolder(view);
+        return new VehiclesViewHolder(view, mOnVehicleListener);
     }
 
     @Override
@@ -41,18 +42,33 @@ public class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.Vehicl
         return mDataSet.size();
     }
 
-    public static class VehiclesViewHolder extends RecyclerView.ViewHolder
+    public static class VehiclesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         private final TextView mVeh_PlateNo;
+        OnVehicleListener onVehicleListener;
 
-        public VehiclesViewHolder(@NonNull View itemView) {
+        public VehiclesViewHolder(@NonNull View itemView, OnVehicleListener onVehicleListener) {
             super(itemView);
             mVeh_PlateNo = itemView.findViewById(R.id.listVehiclesEntry_plateNo);
+            this.onVehicleListener = onVehicleListener;
+
+            itemView.setOnClickListener(this);
         }
 
         public void update(String value) {
             mVeh_PlateNo.setText(value);
         };
+
+        @Override
+        public void onClick(View v) {
+            onVehicleListener.onVehicleClick(getAdapterPosition());
+        }
+
+        public interface OnVehicleListener{
+            void onVehicleClick(int position);
+        }
     }
+
+
 
 }

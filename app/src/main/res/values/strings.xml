@@ -5,4 +5,5 @@
     <string name="title_fuel">Fuel</string>
     <string name="title_garage">Garage</string>
     <string name="title_events">Events</string>
+    <string name="VEHICLE_DETAILS_EXTRA">"VEHICLE_DETAILS"</string>
 </resources>

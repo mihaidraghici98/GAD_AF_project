@@ -1,5 +1,6 @@
 package com.example.gad_af_project;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gad_af_project.vehicles.Vehicle;
+import com.example.gad_af_project.vehicles.VehicleActivity;
 import com.example.gad_af_project.vehicles.VehiclesAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -24,8 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        // ======== NAV BAR
+        // ======== BOTTOM NAV BAR
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -36,10 +37,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
         // ========================
-
-
-
-
 
     }
 }
