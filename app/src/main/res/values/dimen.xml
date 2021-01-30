@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="newVehicleActivity_titleSize">30sp</dimen>
+    <dimen name="newVehicleActivity_subtitleSize">25sp</dimen>
+    <dimen name="newVehicleActivity_textSize">20sp</dimen>
+    <dimen name="newVehicleActivity_tileMarginBottom">10dp</dimen>
+    <dimen name="newVehicleActivity_tilePaddingHorizontally">30dp</dimen>
+    <dimen name="newVehicleActivity_tilePaddingVertically">10dp</dimen>
+</resources>

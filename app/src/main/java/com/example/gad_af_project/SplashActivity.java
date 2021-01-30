@@ -53,20 +53,4 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, timeBeforeMainAct);
     }
-
-    public void startAnimation(android.view.View view){
-        //RotateAnimation anim = new RotateAnimation(0f, 350f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        Animation fadeIn = new AlphaAnimation(0, 1);
-        fadeIn.setInterpolator(new AccelerateDecelerateInterpolator());
-        fadeIn.setRepeatCount(0);
-        fadeIn.setDuration(1000);
-
-        logo_icon.startAnimation(fadeIn);
-        logo_text.startAnimation(fadeIn);
-    }
-
-    public void stopAnimation(android.view.View view){
-        logo_icon.setAnimation(null);
-        logo_text.startAnimation(null);
-    }
 }

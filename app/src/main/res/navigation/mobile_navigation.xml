@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_fuel"
-        android:name="com.example.gad_af_project.ui.fuel.FuelFragment"
+        android:name="com.example.gad_af_project.ui.fragments.fuel.FuelFragment"
         android:label="@string/title_fuel"
         tools:layout="@layout/fragment_fuel" />
 
     <fragment
         android:id="@+id/navigation_garage"
-        android:name="com.example.gad_af_project.ui.garage.GarageFragment"
+        android:name="com.example.gad_af_project.ui.fragments.garage.GarageFragment"
         android:label="@string/title_garage"
         tools:layout="@layout/fragment_garage" />
 
     <fragment
         android:id="@+id/navigation_events"
-        android:name="com.example.gad_af_project.ui.events.EventsFragment"
+        android:name="com.example.gad_af_project.ui.fragments.events.EventsFragment"
         android:label="@string/title_events"
         tools:layout="@layout/fragment_events" />
 </navigation>

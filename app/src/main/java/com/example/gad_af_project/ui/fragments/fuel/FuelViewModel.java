@@ -1,4 +1,4 @@
-package com.example.gad_af_project.ui.fuel;
+package com.example.gad_af_project.ui.fragments.fuel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

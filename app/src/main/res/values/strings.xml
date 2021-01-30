@@ -5,5 +5,8 @@
     <string name="title_fuel">Fuel</string>
     <string name="title_garage">Garage</string>
     <string name="title_events">Events</string>
-    <string name="VEHICLE_DETAILS_EXTRA">"VEHICLE_DETAILS"</string>
+    <string name="newVehicle_type">Type:</string>
+    <string name="newVehicle_identification">Identification</string>
+    <string name="newVehicle_details">Details</string>
+    <string name="newVehicle_characteristics">Caracteristici</string>
 </resources>

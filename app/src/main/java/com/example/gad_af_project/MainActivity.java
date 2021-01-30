@@ -1,6 +1,5 @@
 package com.example.gad_af_project;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,16 +7,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.gad_af_project.vehicles.Vehicle;
-import com.example.gad_af_project.vehicles.VehicleActivity;
-import com.example.gad_af_project.vehicles.VehiclesAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 

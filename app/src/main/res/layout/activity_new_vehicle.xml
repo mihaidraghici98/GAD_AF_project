@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.fragments.garage.GarageFragment"
+        android:background="@color/gray"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/newVehicle_categoryTile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingHorizontal="@dimen/newVehicleActivity_tilePaddingHorizontally"
+            android:paddingVertical="@dimen/newVehicleActivity_tilePaddingVertically"
+            android:clipToPadding="false"
+            android:layout_marginTop="@dimen/newVehicleActivity_tileMarginBottom"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/newVehicle_categoryTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+
+                android:text="@string/newVehicle_type"
+                android:textSize="@dimen/newVehicleActivity_subtitleSize"
+                android:paddingBottom="5dp"/>
+
+            <ToggleButton
+                android:id="@+id/newVehicle_moto"
+                android:layout_width="70dp"
+                android:layout_height="55dp"
+                android:background="@drawable/button_moto_unpressed"
+
+                app:layout_constraintTop_toBottomOf="@id/newVehicle_categoryTitle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/newVehicle_car"
+
+                android:textOn=""
+                android:textOff=""
+                android:text=""
+                />
+
+            <ToggleButton
+                android:id="@+id/newVehicle_car"
+                android:layout_width="70dp"
+                android:layout_height="55dp"
+                android:background="@drawable/button_car_unpressed"
+
+                app:layout_constraintTop_toBottomOf="@id/newVehicle_categoryTitle"
+                app:layout_constraintLeft_toRightOf="@id/newVehicle_moto"
+                app:layout_constraintRight_toLeftOf="@id/newVehicle_truck"
+                android:textOn=""
+                android:textOff=""
+                android:text=""
+                />
+
+            <ToggleButton
+                android:id="@+id/newVehicle_truck"
+                android:layout_width="70dp"
+                android:layout_height="55dp"
+                android:background="@drawable/button_truck_unpressed"
+
+                app:layout_constraintTop_toBottomOf="@id/newVehicle_categoryTitle"
+                app:layout_constraintLeft_toRightOf="@id/newVehicle_car"
+                app:layout_constraintRight_toRightOf="parent"
+                android:textOn=""
+                android:textOff=""
+                android:text=""
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/newVehicle_identificationTile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@id/newVehicle_categoryTile"
+            android:paddingHorizontal="@dimen/newVehicleActivity_tilePaddingHorizontally"
+            android:paddingVertical="@dimen/newVehicleActivity_tilePaddingVertically"
+            android:clipToPadding="false"
+            android:layout_marginTop="@dimen/newVehicleActivity_tileMarginBottom"
+
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/newVehicle_identificationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+
+                android:text="@string/newVehicle_identification"
+                android:textSize="@dimen/newVehicleActivity_subtitleSize"
+                android:paddingBottom="5dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newVehicle_vin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:counterEnabled="true"
+                app:counterMaxLength="17"
+
+                app:layout_constraintTop_toBottomOf="@id/newVehicle_identificationTitle"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newVehicle_et_vin"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/blue_200"
+                    android:hint="VIN"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newVehicle_plateno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:counterEnabled="true"
+                app:counterMaxLength="7"
+
+                app:layout_constraintTop_toBottomOf="@id/newVehicle_vin"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newVehicle_et_plateno"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Plate number"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/newVehicle_characteristicsTile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@id/newVehicle_identificationTile"
+            android:paddingHorizontal="@dimen/newVehicleActivity_tilePaddingHorizontally"
+            android:paddingVertical="@dimen/newVehicleActivity_tilePaddingVertically"
+            android:clipToPadding="false"
+            android:layout_marginTop="@dimen/newVehicleActivity_tileMarginBottom"
+
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/newVehicle_characteristicsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+
+                android:text="@string/newVehicle_characteristics"
+                android:textSize="@dimen/newVehicleActivity_subtitleSize"
+                android:paddingBottom="5dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newVehicle_make"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toBottomOf="@id/newVehicle_characteristicsTitle"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newVehicle_et_make"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/blue_200"
+                    android:hint="Marcă"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newVehicle_model"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toBottomOf="@id/newVehicle_characteristicsTitle"
+                app:layout_constraintLeft_toRightOf="@id/newVehicle_make"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newVehicle_et_model"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Model"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newVehicle_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp"
+
+                app:layout_constraintTop_toBottomOf="@id/newVehicle_make"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newVehicle_et_year"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/blue_200"
+                    android:inputType="date"
+                    android:hint="An"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/newVehicle_tv_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Unitate:"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/newVehicle_odometer"
+                app:layout_constraintBottom_toBottomOf="@id/newVehicle_odometer"
+                app:layout_constraintRight_toLeftOf="@id/newVehicle_spinner_unit"
+
+                />
+
+            <Spinner
+                android:id="@+id/newVehicle_spinner_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toTopOf="@id/newVehicle_odometer"
+                app:layout_constraintBottom_toBottomOf="@id/newVehicle_odometer"
+                app:layout_constraintLeft_toRightOf="@id/newVehicle_tv_unit"/>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newVehicle_odometer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toBottomOf="@id/newVehicle_year"
+                app:layout_constraintLeft_toRightOf="@id/newVehicle_spinner_unit"
+                app:layout_constraintStart_toStartOf="@id/newVehicle_model"
+                android:layout_marginTop="15dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newVehicle_et_odometer"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+
+                    android:hint="Odometru"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/newVehicle_tv_fuel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Combustibil:"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/newVehicle_fuelTank"
+                app:layout_constraintBottom_toBottomOf="@id/newVehicle_fuelTank"
+                app:layout_constraintRight_toLeftOf="@id/newVehicle_spinner_fuel"
+
+                />
+
+            <Spinner
+                android:id="@+id/newVehicle_spinner_fuel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toTopOf="@id/newVehicle_fuelTank"
+                app:layout_constraintBottom_toBottomOf="@id/newVehicle_fuelTank"
+                app:layout_constraintLeft_toRightOf="@id/newVehicle_tv_fuel"/>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newVehicle_fuelTank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toBottomOf="@id/newVehicle_odometer"
+                app:layout_constraintLeft_toRightOf="@id/newVehicle_spinner_fuel"
+                app:layout_constraintStart_toStartOf="@id/newVehicle_odometer"
+                android:layout_marginTop="15dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newVehicle_et_fuelTank"
+                    android:layout_width="150dp"
+                    android:inputType="number"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Capacitate"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newVehicle_engine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/newVehicle_power"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newVehicle_et_engine"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/blue_200"
+                    android:inputType="number"
+                    android:hint="Motor (cmc)"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newVehicle_power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/newVehicle_fuelTank"
+                app:layout_constraintLeft_toRightOf="@id/newVehicle_engine"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newVehicle_et_power"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+
+                    android:hint="Putere (cp)"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/newVehicle_buttonPlaceholder"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layout_constraintTop_toBottomOf="@id/newVehicle_characteristicsTile"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/newVehicle_button_saveVehicle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+
+            android:text="SALVEAZA"
+            android:textSize="25sp"
+            android:background="@drawable/shadow_gray"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

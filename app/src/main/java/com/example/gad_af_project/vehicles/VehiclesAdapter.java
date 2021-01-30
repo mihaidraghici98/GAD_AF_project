@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gad_af_project.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.VehiclesViewHolder>{
 
-    private final ArrayList<Vehicle> mDataSet;
+    private final List<Vehicle> mDataSet;
     private VehiclesViewHolder.OnVehicleListener mOnVehicleListener;
 
-    public VehiclesAdapter(ArrayList<Vehicle> vehicles_list, VehiclesViewHolder.OnVehicleListener onVehicleListener){
+    public VehiclesAdapter(List<Vehicle> vehicles_list, VehiclesViewHolder.OnVehicleListener onVehicleListener){
         mDataSet = vehicles_list;
         this.mOnVehicleListener = onVehicleListener;
     }
@@ -34,7 +34,7 @@ public class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.Vehicl
 
     @Override
     public void onBindViewHolder(@NonNull VehiclesViewHolder holder, int position) {
-        holder.update(mDataSet.get(position).getPlateNo());
+        holder.update(mDataSet.get(position).getPlateNumber());
     }
 
     @Override

@@ -1,5 +1,6 @@
-package com.example.gad_af_project.vehicles;
+package com.example.gad_af_project;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -10,12 +11,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.gad_af_project.R;
+import com.example.gad_af_project.database.AppDatabase;
+import com.example.gad_af_project.vehicles.Vehicle;
 
 public class VehicleActivity extends AppCompatActivity {
 
     private Vehicle mVehicleData;
     private TextView vehiclePlateNo;
+    public final static String IKEY_VEHICLE_ID = "com.example.intent.keys.VEHICLE_ID";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,11 +28,17 @@ public class VehicleActivity extends AppCompatActivity {
         vehiclePlateNo = findViewById(R.id.activityVehicle_plateno);
 
         Intent intent = getIntent();
+        int mVehicleId = -1;
         if(intent != null){
-            mVehicleData = (Vehicle) intent.getSerializableExtra(getString(R.string.VEHICLE_DETAILS_EXTRA));
+            mVehicleId = intent.getIntExtra(IKEY_VEHICLE_ID, -1);
         }
-
-        vehiclePlateNo.setText(mVehicleData.getPlateNo());
+        if(mVehicleId != -1) {
+            mVehicleData = AppDatabase.getAppDatabase(getApplicationContext()).vehicleDao().getVehicleById(mVehicleId);
+            vehiclePlateNo.setText(mVehicleData.getPlateNumber());
+        }
+        else {
+            vehiclePlateNo.setText("VEHID_NOT_RECEIVED");
+        }
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -40,5 +49,11 @@ public class VehicleActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return true;
         //return super.onOptionsItemSelected(item);
+    }
+
+    public static Intent getStartingIntent(Context ctx, int vehicle_id) {
+        Intent intent = new Intent(ctx, VehicleActivity.class);
+        intent.putExtra(IKEY_VEHICLE_ID, vehicle_id);
+        return intent;
     }
 }

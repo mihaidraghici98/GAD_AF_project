@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fuel.FuelFragment"
+    tools:context=".ui.fragments.fuel.FuelFragment"
     android:background="@color/blue_200">
 
     <TextView

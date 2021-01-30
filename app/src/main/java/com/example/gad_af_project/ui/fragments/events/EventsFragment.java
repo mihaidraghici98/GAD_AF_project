@@ -1,4 +1,4 @@
-package com.example.gad_af_project.ui.fuel;
+package com.example.gad_af_project.ui.fragments.events;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.gad_af_project.R;
 
-public class FuelFragment extends Fragment {
+public class EventsFragment extends Fragment {
 
-    private FuelViewModel fuelViewModel;
+    private EventsViewModel eventsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        fuelViewModel =
-                new ViewModelProvider(this).get(FuelViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_fuel, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        fuelViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        eventsViewModel =
+                new ViewModelProvider(this).get(EventsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_events, container, false);
+        final TextView textView = root.findViewById(R.id.text_notifications);
+        eventsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
