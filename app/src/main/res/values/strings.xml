@@ -17,4 +17,14 @@
     <string name="vehicle_dataTile_vinText">Serie șasiu</string>
     <string name="vehicle_dataTile_odometerText">Odometru</string>
     <string name="vehicle_documentsTile_title">Documente</string>
+    <string name="garage_contextmenu_delete">Sterge vehicul</string>
+    <string name="yes">Da</string>
+    <string name="no">Nu</string>
+    <string name="garage_deleteVehicleWarningTitle">
+        Esti sigur?
+    </string>
+    <string name="garage_deleteVehicleWarningMessage">
+        Acest proces este ireversibil si presupune stergerea tuturor datelor legate de vehicul.
+    </string>
+    <string name="garage_deleteVehicleConfirmation">Vehicul eliminat.</string>
 </resources>

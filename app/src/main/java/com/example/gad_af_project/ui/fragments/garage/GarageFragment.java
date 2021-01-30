@@ -1,9 +1,12 @@
 package com.example.gad_af_project.ui.fragments.garage;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,6 +23,7 @@ import com.example.gad_af_project.database.AppDatabase;
 import com.example.gad_af_project.vehicles.Vehicle;
 import com.example.gad_af_project.VehicleActivity;
 import com.example.gad_af_project.vehicles.VehiclesAdapter;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -27,6 +31,7 @@ import java.util.List;
 
 public class GarageFragment extends Fragment implements VehiclesAdapter.VehiclesViewHolder.OnVehicleListener {
 
+    View root;
     private VehiclesAdapter mAdapter;
     private RecyclerView mList;
     private List<Vehicle> mVehiclesDataSource;
@@ -35,7 +40,7 @@ public class GarageFragment extends Fragment implements VehiclesAdapter.Vehicles
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_garage, container, false);
+        root = inflater.inflate(R.layout.fragment_garage, container, false);
         //final TextView textView = root.findViewById(R.id.text_dashboard);
 
         // ========== Recycler View
@@ -61,22 +66,29 @@ public class GarageFragment extends Fragment implements VehiclesAdapter.Vehicles
         getData();
     }
 
-    private void getData() {
-        class GetData extends AsyncTask<Void, Void, List<Vehicle>>{
-            @Override
-            protected List<Vehicle> doInBackground(Void... voids) {
-                return AppDatabase.getAppDatabase(null).vehicleDao().getAllVehicles();
-            }
 
-            @Override
-            protected void onPostExecute(List<Vehicle> vehicles) {
-                mVehiclesDataSource = vehicles;
-                mAdapter = new VehiclesAdapter(mVehiclesDataSource, GarageFragment.this);
-                mList.setAdapter(mAdapter);
-                super.onPostExecute(vehicles);
-            }
+    static class GetData extends AsyncTask<Void, Void, List<Vehicle>>{
+        GarageFragment mGarageFragment;
+        public GetData(GarageFragment mGarageFragment){
+            this.mGarageFragment = mGarageFragment;
         }
-        GetData gd = new GetData();
+
+        @Override
+        protected List<Vehicle> doInBackground(Void... voids) {
+            return AppDatabase.getAppDatabase(null).vehicleDao().getAllVehicles();
+        }
+
+        @Override
+        protected void onPostExecute(List<Vehicle> vehicles) {
+            mGarageFragment.mVehiclesDataSource = vehicles;
+            mGarageFragment.mAdapter = new VehiclesAdapter(mGarageFragment.mVehiclesDataSource, mGarageFragment);
+            mGarageFragment.mList.setAdapter(mGarageFragment.mAdapter);
+            super.onPostExecute(vehicles);
+        }
+    }
+    private void getData() {
+
+        GetData gd = new GetData(this);
         gd.execute();
     }
 
@@ -86,4 +98,61 @@ public class GarageFragment extends Fragment implements VehiclesAdapter.Vehicles
         Intent intent = VehicleActivity.getStartingIntent(getContext(), mVehicleData.getVehicleId());
         startActivity(intent);
     }
+
+
+    static class DeleteData extends AsyncTask<Void, Void, Void>{
+
+        GarageFragment mGarageFragment;
+        Vehicle vehicle;
+
+        public DeleteData(GarageFragment mGarageFragment, Vehicle vehicle){
+            this.mGarageFragment = mGarageFragment;
+            this.vehicle = vehicle;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            AppDatabase.getAppDatabase(null).vehicleDao().deleteVehicle(vehicle);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            mGarageFragment.getData();
+            mGarageFragment.displayMessage(mGarageFragment.getResources().getString(R.string.garage_deleteVehicleConfirmation));
+        }
+    }
+    @Override
+    public void onVehicleDelete(int position) {
+
+        Vehicle mVehicleData = mVehiclesDataSource.get(position);
+        DeleteData dd = new DeleteData(this, mVehicleData);
+        dd.execute();
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == 121) {
+            new AlertDialog.Builder(getContext())
+                    .setTitle(R.string.garage_deleteVehicleWarningTitle)
+                    .setMessage(R.string.garage_deleteVehicleWarningMessage)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton){
+                            onVehicleDelete(item.getGroupId());
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, null).show();
+
+            return true;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+
+    private void displayMessage(String message){
+        Snackbar.make(root, message, Snackbar.LENGTH_SHORT).show();
+    }
+
 }

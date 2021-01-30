@@ -1,6 +1,7 @@
 package com.example.gad_af_project.vehicles;
 
 import android.text.Layout;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gad_af_project.MyApplication;
 import com.example.gad_af_project.R;
 
 import java.util.List;
@@ -42,15 +44,19 @@ public class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.Vehicl
         return mDataSet.size();
     }
 
-    public static class VehiclesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    public static class VehiclesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener
     {
         private final TextView mVeh_PlateNo;
+        private RelativeLayout relativeLayout;
         OnVehicleListener onVehicleListener;
 
         public VehiclesViewHolder(@NonNull View itemView, OnVehicleListener onVehicleListener) {
             super(itemView);
             mVeh_PlateNo = itemView.findViewById(R.id.listVehiclesEntry_plateNo);
             this.onVehicleListener = onVehicleListener;
+
+            relativeLayout = itemView.findViewById(R.id.garage_vehicle_item);
+            relativeLayout.setOnCreateContextMenuListener(this);
 
             itemView.setOnClickListener(this);
         }
@@ -64,8 +70,14 @@ public class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.Vehicl
             onVehicleListener.onVehicleClick(getAdapterPosition());
         }
 
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            menu.add(this.getAdapterPosition(), 121, 0, MyApplication.getR().getString(R.string.garage_contextmenu_delete));
+        }
+
         public interface OnVehicleListener{
             void onVehicleClick(int position);
+            void onVehicleDelete(int position);
         }
     }
 
