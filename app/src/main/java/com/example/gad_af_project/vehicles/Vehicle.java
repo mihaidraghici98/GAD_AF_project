@@ -63,6 +63,21 @@ public class Vehicle {
         return plateNumber;
     }
 
+    public String getPlateNumberFormatted() {
+        if(plateNumber.equals(""))
+            return "";
+        String res = "";
+        if(plateNumber.charAt(0) == 'B' && Character.isDigit(plateNumber.charAt(1))){
+            if(Character.isDigit(plateNumber.charAt(3))) // B 123 ABC
+                res = "B " + plateNumber.substring(1, 4) + " " + plateNumber.substring(4, 7);
+            else // B 12 ABC
+                res = "B " + plateNumber.substring(1, 3) + " " + plateNumber.substring(3, 6);
+        }
+        else // XX 12 ABC
+            res = plateNumber.substring(0, 2) + " " + plateNumber.substring(2, 4) + " " + plateNumber.substring(4, 7);
+        return res;
+    }
+
     public String getVin() {
         return vin;
     }

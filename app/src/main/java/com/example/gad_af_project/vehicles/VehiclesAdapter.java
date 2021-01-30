@@ -34,7 +34,7 @@ public class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.Vehicl
 
     @Override
     public void onBindViewHolder(@NonNull VehiclesViewHolder holder, int position) {
-        holder.update(mDataSet.get(position).getPlateNumber());
+        holder.update(mDataSet.get(position).getPlateNumberFormatted());
     }
 
     @Override

@@ -6,4 +6,9 @@
     <dimen name="newVehicleActivity_tileMarginBottom">10dp</dimen>
     <dimen name="newVehicleActivity_tilePaddingHorizontally">30dp</dimen>
     <dimen name="newVehicleActivity_tilePaddingVertically">10dp</dimen>
+    <dimen name="tilePaddingVertical">10dp</dimen>
+    <dimen name="tilePaddingHorizontal">30dp</dimen>
+    <dimen name="tileMarginVertical">10dp</dimen>
+    <dimen name="tileTitleFontSize">25sp</dimen>
+    <dimen name="tileTextFontSize">15sp</dimen>
 </resources>

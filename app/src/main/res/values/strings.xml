@@ -9,4 +9,12 @@
     <string name="newVehicle_identification">Identification</string>
     <string name="newVehicle_details">Details</string>
     <string name="newVehicle_characteristics">Caracteristici</string>
+    <string name="vehicle_dataTile_title">Date generale</string>
+    <string name="vehicle_dataTile_makeText">Marcă</string>
+    <string name="defaultValue">notset</string>
+    <string name="vehicle_dataTile_modelText">Model</string>
+    <string name="vehicle_dataTile_engineText">Motor</string>
+    <string name="vehicle_dataTile_vinText">Serie șasiu</string>
+    <string name="vehicle_dataTile_odometerText">Odometru</string>
+    <string name="vehicle_documentsTile_title">Documente</string>
 </resources>

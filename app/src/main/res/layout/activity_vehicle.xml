@@ -1,27 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
-
-    <TextView
-        android:layout_width="200dp"
-        android:id="@+id/default_text"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/gray_100">
+    <LinearLayout
         android:layout_height="wrap_content"
-        android:text="Here you can find vehicle's information!"
-        android:textSize="30sp"
-        android:textColor="@color/black"/>
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@color/gray_100">
 
-    <TextView
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/activityVehicle_plateno"
-        android:text="XX XX XXX"
-        android:textSize="30sp"
-        android:textColor="@color/black"
-        android:layout_below="@id/default_text"
-        android:gravity="center_horizontal"
-        android:background="@drawable/shadow"
-        android:layout_marginTop="20dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
 
-</RelativeLayout>
+            android:layout_marginVertical="@dimen/tileMarginVertical"
+            android:paddingHorizontal="@dimen/tilePaddingHorizontal"
+            android:paddingBottom="@dimen/tilePaddingVertical">
+
+            <TextView
+                android:id="@+id/tv_vehicle_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/vehicle_dataTile_title"
+                android:textSize="@dimen/tileTitleFontSize"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_600"
+                android:layout_marginBottom="5dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp">
+
+                <TextView
+                    android:id="@+id/tv_vehicle_data_make"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:text="@string/vehicle_dataTile_makeText"/>
+                <TextView
+                    android:id="@+id/tv_vehicle_data_makePlaceholder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintTop_toTopOf="@id/tv_vehicle_data_make"
+                    app:layout_constraintRight_toRightOf="parent"
+
+                    android:text="@string/defaultValue"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/tv_vehicle_data_model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintTop_toBottomOf="@id/tv_vehicle_data_make"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:text="@string/vehicle_dataTile_modelText"/>
+                <TextView
+                    android:id="@+id/tv_vehicle_data_modelPlaceholder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintTop_toTopOf="@id/tv_vehicle_data_model"
+                    app:layout_constraintRight_toRightOf="parent"
+
+                    android:text="@string/defaultValue"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/tv_vehicle_data_engine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintTop_toBottomOf="@id/tv_vehicle_data_model"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:text="@string/vehicle_dataTile_engineText"/>
+                <TextView
+                    android:id="@+id/tv_vehicle_data_enginePlaceholder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintTop_toTopOf="@id/tv_vehicle_data_engine"
+                    app:layout_constraintRight_toRightOf="parent"
+
+                    android:text="@string/defaultValue"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/tv_vehicle_data_vin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintTop_toBottomOf="@id/tv_vehicle_data_engine"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:text="@string/vehicle_dataTile_vinText"/>
+                <TextView
+                    android:id="@+id/tv_vehicle_data_vinPlaceholder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintTop_toTopOf="@id/tv_vehicle_data_vin"
+                    app:layout_constraintRight_toRightOf="parent"
+
+                    android:text="@string/defaultValue"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/tv_vehicle_data_odometer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintTop_toBottomOf="@id/tv_vehicle_data_vin"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:text="@string/vehicle_dataTile_odometerText"/>
+                <TextView
+                    android:id="@+id/tv_vehicle_data_odometerPlaceholder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintTop_toTopOf="@id/tv_vehicle_data_odometer"
+                    app:layout_constraintRight_toRightOf="parent"
+
+                    android:text="@string/defaultValue"
+                    android:textColor="@color/black"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+
+            android:layout_marginVertical="@dimen/tileMarginVertical"
+            android:paddingHorizontal="@dimen/tilePaddingHorizontal"
+            android:paddingBottom="@dimen/tilePaddingVertical">
+
+            <TextView
+                android:id="@+id/tv_vehicle_documents"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/vehicle_documentsTile_title"
+                android:textSize="@dimen/tileTitleFontSize"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_600"
+                android:layout_marginBottom="5dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_vehicle_documents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+<!--
+        <TextView
+            android:layout_width="200dp"
+            android:id="@+id/default_text"
+            android:layout_height="wrap_content"
+            android:text="Here you can find vehicle's information!"
+            android:textSize="30sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/activityVehicle_plateno"
+            android:text="XX XX XXX"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:layout_below="@id/default_text"
+            android:gravity="center_horizontal"
+            android:background="@drawable/shadow"
+            android:layout_marginTop="20dp"/>
+        -->
+
+
+
+
+    </LinearLayout>
+</ScrollView>

@@ -33,6 +33,13 @@ public class OdometerHistory {
     @ColumnInfo(name = "unit")
     private String unit;
 
+    public OdometerHistory(int vehicleId, Date date, int value, String unit){
+        this.vehicleId = vehicleId;
+        this.date = date;
+        this.value = value;
+        this.unit = unit;
+    }
+
     //region GETTERS
     public int getEntryId() {
         return entryId;

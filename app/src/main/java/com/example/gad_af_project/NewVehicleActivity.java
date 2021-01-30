@@ -3,6 +3,8 @@ package com.example.gad_af_project;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -10,7 +12,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
@@ -43,11 +47,23 @@ public class NewVehicleActivity extends AppCompatActivity {
     EditText mEngineCapacity;
     EditText mEnginePower;
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_vehicle);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         mToggleButtonMoto =     (ToggleButton)findViewById(R.id.newVehicle_moto);
         mToggleButtonMoto.setOnClickListener(new View.OnClickListener() {
@@ -152,21 +168,17 @@ public class NewVehicleActivity extends AppCompatActivity {
             protected Void doInBackground(WrapParams... wrapParams) {
                 Vehicle vehicle = wrapParams[0].vehicle;
                 int odometer = wrapParams[0].odometer;
+                Log.v(TAG, "odometer value in doInBackground: " + odometer);
                 long vehicle_id = AppDatabase.getAppDatabase(null).vehicleDao().insertVehicle(vehicle);
                 if(odometer > 0){
-                    OdometerHistory odometerHistory = new OdometerHistory();
-                    odometerHistory.setDate(new Date());
-                    odometerHistory.setUnit(vehicle.getOdometerUnit());
-                    odometerHistory.setVehicleId((int)vehicle_id);
-                    odometerHistory.setValue(odometer);
+                    OdometerHistory odometerHistory = new OdometerHistory((int)vehicle_id, new Date(), odometer, vehicle.getOdometerUnit());
+                    AppDatabase.getAppDatabase(null).odometerDao().insertOdometer(odometerHistory);
                 }
                 return null;
             }
         }
         if (!validatePlateNumber())
             return;
-
-
 
         Vehicle vehicle = new Vehicle.Builder(mPlateNumber.getText().toString())
                                 .withVin(mVIN.getText().toString())
