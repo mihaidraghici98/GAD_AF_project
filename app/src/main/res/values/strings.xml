@@ -27,4 +27,5 @@
         Acest proces este ireversibil si presupune stergerea tuturor datelor legate de vehicul.
     </string>
     <string name="garage_deleteVehicleConfirmation">Vehicul eliminat.</string>
+    <string name="plateNumber_placeholder">XX XX XXX</string>
 </resources>

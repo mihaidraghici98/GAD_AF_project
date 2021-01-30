@@ -181,6 +181,7 @@ public class NewVehicleActivity extends AppCompatActivity {
             return;
 
         Vehicle vehicle = new Vehicle.Builder(mPlateNumber.getText().toString())
+                                .type(getVehicleType())
                                 .withVin(mVIN.getText().toString())
                                 .makeAndModel(mMake.getText().toString(), mModel.getText().toString())
                                 .fromYear(mYear.getText().toString().equals("") ? 0 : Integer.parseInt(mYear.getText().toString()))

@@ -2,9 +2,11 @@ package com.example.gad_af_project;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,15 +18,23 @@ import com.example.gad_af_project.database.AppDatabase;
 import com.example.gad_af_project.vehicles.OdometerHistory;
 import com.example.gad_af_project.vehicles.Vehicle;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class VehicleActivity extends AppCompatActivity {
 
     public final static String IKEY_VEHICLE_ID = "com.example.intent.keys.VEHICLE_ID";
+    Map<String, Integer> vehicleIcons;
 
     private int mVehicleId;
     private Vehicle mVehicleData;
     private OdometerHistory mLastOdometer;
 
     private ActionBar actionBar;
+    private ImageView mVehicleIcon;
+    private TextView mPlate;
     private TextView mMake;
     private TextView mModel;
     private TextView mEngine;
@@ -44,9 +54,17 @@ public class VehicleActivity extends AppCompatActivity {
             mVehicleId = -1;
         }
 
+        vehicleIcons = new HashMap<String, Integer>();
+        vehicleIcons.put("moto", R.drawable.button_moto);
+        vehicleIcons.put("car", R.drawable.button_car);
+        vehicleIcons.put("truck", R.drawable.button_truck);
+
         actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Garage");
 
+        mVehicleIcon = findViewById(R.id.iv_vehicle_icon);
+        mPlate = findViewById(R.id.tv_vehicle_plateNumber);
         mMake = findViewById(R.id.tv_vehicle_data_makePlaceholder);
         mModel = findViewById(R.id.tv_vehicle_data_modelPlaceholder);
         mEngine = findViewById(R.id.tv_vehicle_data_enginePlaceholder);
@@ -70,12 +88,11 @@ public class VehicleActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onPostExecute(Vehicle vehicle) {
+            protected void onPostExecute(@NotNull Vehicle vehicle) {
                 super.onPostExecute(vehicle);
-                if (vehicle == null)
-                    return;
                 mVehicleData = vehicle;
-                actionBar.setTitle(mVehicleData.getPlateNumberFormatted());
+                mVehicleIcon.setImageDrawable(getDrawable(vehicleIcons.get(mVehicleData.getVehicleType())));
+                mPlate.setText(mVehicleData.getPlateNumberFormatted());
                 mMake.setText(mVehicleData.getMake());
                 mModel.setText(mVehicleData.getModel());
                 mEngine.setText(mVehicleData.getEngineCapacity() + "cmc " + mVehicleData.getEnginePower() + "hp");
