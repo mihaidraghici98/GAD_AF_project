@@ -1,4 +1,4 @@
-package com.example.gad_af_project.vehicles;
+package com.example.gad_af_project.database;
 
 import androidx.room.TypeConverter;
 

@@ -28,4 +28,12 @@
     </string>
     <string name="garage_deleteVehicleConfirmation">Vehicul eliminat.</string>
     <string name="plateNumber_placeholder">XX XX XXX</string>
+    <string name="vehicle_addOdometerEntry"><u>Adauga intrare</u></string>
+    <string name="vehicle_viewOdometerHistory"><u>Vezi istoric</u></string>datePlaceholder
+    <string name="datePlaceholder">01-01-1970</string>
+    <string name="vehicle_addOdometerValue">Valoare:</string>
+    <string name="vehicle_addOdometerDate">Data:</string>
+    <string name="vehicle_addOdometerEntryConfirmation">Intrare adaugată cu succes.</string>
+    <string name="error_emptyField">Campul nu poate fi liber.</string>error_invalidField
+    <string name="error_invalidField">Campul este invalid.</string>
 </resources>

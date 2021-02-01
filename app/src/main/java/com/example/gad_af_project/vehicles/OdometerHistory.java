@@ -7,10 +7,12 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import com.example.gad_af_project.database.DateConverter;
+
 import java.util.Date;
 
 @Entity(tableName = "Odometer",
-        indices = @Index(value = "vehicleId", unique = true),
+        indices = @Index(value = "vehicleId"),
         foreignKeys = @ForeignKey(entity = Vehicle.class,
         parentColumns = "id",
         childColumns = "vehicleId",
