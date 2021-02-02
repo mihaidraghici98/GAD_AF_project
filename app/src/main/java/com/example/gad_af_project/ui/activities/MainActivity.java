@@ -1,4 +1,4 @@
-package com.example.gad_af_project;
+package com.example.gad_af_project.ui.activities;
 
 import android.os.Bundle;
 
@@ -8,6 +8,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.gad_af_project.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.gad_af_project;
+package com.example.gad_af_project.ui.activities;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.example.gad_af_project.R;
 import com.example.gad_af_project.database.AppDatabase;
 import com.example.gad_af_project.vehicles.OdometerHistory;
 import com.example.gad_af_project.vehicles.Vehicle;

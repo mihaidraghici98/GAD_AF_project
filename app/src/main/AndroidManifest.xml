@@ -13,27 +13,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GAD_AF_project">
 
-        <activity android:name=".SplashActivity" android:noHistory="true">
+        <activity android:name=".ui.activities.SplashActivity" android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VEHICLE_LIST" />
             </intent-filter>
         </activity>
-        <activity android:name=".VehicleActivity">
+        <activity android:name=".ui.activities.VehicleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VEHICLE" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".NewVehicleActivity">
+        <activity android:name=".ui.activities.NewVehicleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.NEW_VEHICLE" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.activities.OdometerHistoryActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SHOW_ODO_HISTORY" />
             </intent-filter>
         </activity>
     </application>

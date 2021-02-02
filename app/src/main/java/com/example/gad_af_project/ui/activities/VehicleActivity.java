@@ -1,4 +1,4 @@
-package com.example.gad_af_project;
+package com.example.gad_af_project.ui.activities;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -18,7 +18,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.gad_af_project.R;
 import com.example.gad_af_project.database.AppDatabase;
 import com.example.gad_af_project.vehicles.OdometerHistory;
 import com.example.gad_af_project.vehicles.Vehicle;
@@ -58,6 +60,8 @@ public class VehicleActivity extends AppCompatActivity implements View.OnClickLi
     private Button mConfirmAOE;
     private Button mCancelAOE;
     private TextView mDateAOE;
+
+    private View mViewOdometerHistory;
 
     private Button mAddDocument;
 
@@ -107,15 +111,18 @@ public class VehicleActivity extends AppCompatActivity implements View.OnClickLi
         mDateAOE = findViewById(R.id.tv_vehicle_AddNewOdometerEntry_datePlaceholder);
         mDateAOE.setOnClickListener(this);
 
+        mViewOdometerHistory = findViewById(R.id.view_vehicle_seeOdometerHistory);
+        mViewOdometerHistory.setOnClickListener(this);
+
         getData();
     }
 
     private void resetAOEfields(){
-        EditText mValueET = (EditText)mViewAOE.findViewById(R.id.et_vehicle_addOdometerEntry_value);
+        EditText mValueET = mViewAOE.findViewById(R.id.et_vehicle_addOdometerEntry_value);
         mValueET.setText("");
         mValueET.setError(null);
 
-        TextView mDateTV = (TextView)mViewAOE.findViewById(R.id.tv_vehicle_AddNewOdometerEntry_datePlaceholder);
+        TextView mDateTV = mViewAOE.findViewById(R.id.tv_vehicle_AddNewOdometerEntry_datePlaceholder);
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         mDateTV.setText(formatter.format(new Date()));
     }
@@ -124,18 +131,20 @@ public class VehicleActivity extends AppCompatActivity implements View.OnClickLi
         class GetData extends AsyncTask<Void, Void, Vehicle> {
             @Override
             protected Vehicle doInBackground(Void... voids) {
-                if(mVehicleId == -1) {
-                    actionBar.setTitle("VEHID_NOT_RECEIVED");
+                if(mVehicleId == -1)
                     return null;
-                }
 
                 mLastOdometer = AppDatabase.getAppDatabase(null).odometerDao().getLastOdometerEntryForVehicle(mVehicleId);
                 return AppDatabase.getAppDatabase(getApplicationContext()).vehicleDao().getVehicleById(mVehicleId);
             }
 
             @Override
-            protected void onPostExecute(@NotNull Vehicle vehicle) {
+            protected void onPostExecute(Vehicle vehicle) {
                 super.onPostExecute(vehicle);
+                if(vehicle == null) {
+                    mPlate.setText(getResources().getString(R.string.unknownText));
+                    return;
+                }
                 mVehicleData = vehicle;
                 mVehicleIcon.setImageDrawable(getDrawable(vehicleIcons.get(mVehicleData.getVehicleType())));
                 mPlate.setText(mVehicleData.getPlateNumberFormatted());
@@ -164,6 +173,7 @@ public class VehicleActivity extends AppCompatActivity implements View.OnClickLi
         return super.onOptionsItemSelected(item);
     }
 
+    @NotNull
     public static Intent getStartingIntent(Context ctx, int vehicle_id) {
         Intent intent = new Intent(ctx, VehicleActivity.class);
         intent.putExtra(IKEY_VEHICLE_ID, vehicle_id);
@@ -259,6 +269,15 @@ public class VehicleActivity extends AppCompatActivity implements View.OnClickLi
         datePickerDialog.show();
     }
 
+    private void launchOdometerHistoryActivity(){
+        if(mLastOdometer == null){
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_noOdometerData), Toast.LENGTH_LONG).show();
+            return;
+        }
+        Intent intent = OdometerHistoryActivity.getStartingIntent(getApplicationContext(), mVehicleId);
+        startActivity(intent);
+    }
+
     @Override
     public void onClick(View v) {
         if(v == mCancelAOE)
@@ -269,6 +288,8 @@ public class VehicleActivity extends AppCompatActivity implements View.OnClickLi
             toggleAOEView();
         else if (v == mDateAOE)
             chooseDate();
+        else if (v == mViewOdometerHistory)
+            launchOdometerHistoryActivity();
         else
             Toast.makeText(this, Integer.toString(v.getId()) + " was pressed.", Toast.LENGTH_LONG).show();
     }

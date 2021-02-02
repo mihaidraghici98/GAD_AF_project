@@ -16,17 +16,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.gad_af_project.MyApplication;
-import com.example.gad_af_project.NewVehicleActivity;
+import com.example.gad_af_project.ui.activities.NewVehicleActivity;
 import com.example.gad_af_project.R;
 import com.example.gad_af_project.database.AppDatabase;
 import com.example.gad_af_project.vehicles.Vehicle;
-import com.example.gad_af_project.VehicleActivity;
+import com.example.gad_af_project.ui.activities.VehicleActivity;
 import com.example.gad_af_project.vehicles.VehiclesAdapter;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GarageFragment extends Fragment implements VehiclesAdapter.VehiclesViewHolder.OnVehicleListener {

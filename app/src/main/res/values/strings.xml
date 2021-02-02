@@ -36,4 +36,14 @@
     <string name="vehicle_addOdometerEntryConfirmation">Intrare adaugată cu succes.</string>
     <string name="error_emptyField">Campul nu poate fi liber.</string>error_invalidField
     <string name="error_invalidField">Campul este invalid.</string>
+    <string name="odometerHistory_title">Istoric Odometru</string>
+    <string name="unknownText">UNKNOWN</string>
+    <string name="error_noOdometerData">Vehiculul nu are date date salvate despre odometru.</string>
+    <string name="day">zi</string>
+    <string name="week">săpt.</string>
+    <string name="month">lună</string>
+    <string name="year">an</string>
+    <string name="rv_odometerHistory_entriesTitle">Intrări</string>
+    <string name="chartType_cumulative">cumulativ</string>
+    <string name="chartType_growth">creștere</string>
 </resources>

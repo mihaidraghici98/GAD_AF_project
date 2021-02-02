@@ -16,7 +16,7 @@ public interface OdometerDao {
     @Query("SELECT * FROM Odometer")
     List<OdometerHistory> getAllOdometerEntries();
 
-    @Query("SELECT * FROM Odometer WHERE vehicleId = :vehicleId")
+    @Query("SELECT * FROM Odometer WHERE vehicleId = :vehicleId ORDER BY timestamp ASC")
     List<OdometerHistory> getOdometerForVehicle(int vehicleId);
 
     @Query("SELECT * FROM Odometer WHERE vehicleId = :vehicleId ORDER BY timestamp DESC LIMIT 1")

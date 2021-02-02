@@ -8,7 +8,8 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:background="@color/gray_100">
+        android:background="@color/gray_100"
+        android:gravity="center_horizontal">
 
 
         <ImageView
@@ -24,24 +25,15 @@
             app:tint="@color/gray_100"
             />
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/tv_vehicle_plateNumber"
+            android:background="@drawable/shadow"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shadow"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal">
-
-            <TextView
-                android:id="@+id/tv_vehicle_plateNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="?titleTextColor"
-                android:textSize="50sp"
-                android:text="@string/plateNumber_placeholder"/>
-
-        </RelativeLayout>
+            android:textColor="?titleTextColor"
+            android:textSize="50sp"
+            android:gravity="center_horizontal"
+            android:text="@string/plateNumber_placeholder"/>
 
 
         <LinearLayout
@@ -178,7 +170,7 @@
                 android:id="@+id/ep_vehicle_addNewOdometerEntry"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="15dp">
 
                 <ImageView
                     android:id="@+id/ic_odometer"
@@ -260,6 +252,7 @@
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/view_vehicle_seeOdometerHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp">

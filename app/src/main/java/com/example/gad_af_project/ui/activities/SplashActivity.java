@@ -1,4 +1,4 @@
-package com.example.gad_af_project;
+package com.example.gad_af_project.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
+
+import com.example.gad_af_project.R;
 
 public class SplashActivity extends AppCompatActivity {
 
