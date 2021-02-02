@@ -132,7 +132,7 @@ public class GarageFragment extends Fragment implements VehiclesAdapter.Vehicles
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == 121) {
             new AlertDialog.Builder(getContext())
-                    .setTitle(R.string.garage_deleteVehicleWarningTitle)
+                    .setTitle(R.string.delete_WarningTitle)
                     .setMessage(R.string.garage_deleteVehicleWarningMessage)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {

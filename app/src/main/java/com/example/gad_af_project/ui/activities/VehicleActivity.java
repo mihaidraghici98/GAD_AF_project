@@ -1,5 +1,6 @@
 package com.example.gad_af_project.ui.activities;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -39,6 +40,7 @@ import java.util.Map;
 public class VehicleActivity extends AppCompatActivity implements View.OnClickListener {
 
     public final static String IKEY_VEHICLE_ID = "com.example.intent.keys.VEHICLE_ID";
+    private final int mRequestCode_odometerHistory = 123;
     Map<String, Integer> vehicleIcons;
 
     private int mVehicleId;
@@ -275,7 +277,17 @@ public class VehicleActivity extends AppCompatActivity implements View.OnClickLi
             return;
         }
         Intent intent = OdometerHistoryActivity.getStartingIntent(getApplicationContext(), mVehicleId);
-        startActivity(intent);
+        startActivityForResult(intent, mRequestCode_odometerHistory);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == mRequestCode_odometerHistory){
+            if(resultCode == Activity.RESULT_OK){
+                if(data.getBooleanExtra("result", false))
+                    getData();
+            }
+        }
     }
 
     @Override

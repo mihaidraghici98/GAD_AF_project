@@ -35,6 +35,9 @@ public class OdometerHistory {
     @ColumnInfo(name = "unit")
     private String unit;
 
+    public OdometerHistory(){
+    }
+
     public OdometerHistory(int vehicleId, Date date, int value, String unit){
         this.vehicleId = vehicleId;
         this.date = date;

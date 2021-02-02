@@ -7,9 +7,9 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:paddingVertical="20dp"
+        android:paddingTop="20dp"
         android:background="@color/gray_100">
 
         <TextView
@@ -28,12 +28,8 @@
             android:background="@color/white"
             android:orientation="vertical"
 
-            android:animateLayoutChanges="true"
-
-
-            android:layout_marginVertical="@dimen/tileMarginVertical"
-            android:paddingBottom="@dimen/tilePaddingVertical"
-            android:paddingVertical="10dp">
+            android:paddingTop="10dp"
+            android:layout_marginTop="@dimen/tileMarginVertical">
 
             <TextView
                 android:id="@+id/tv_vehicle_data"
@@ -91,7 +87,6 @@
                     app:layout_constraintLeft_toRightOf="@id/tv_odometerHistory_granularity"
                     app:layout_constraintTop_toBottomOf="@id/spinner_odometerHistory_type"
 
-
                     android:paddingStart="30dp"/>
 
                 <Button
@@ -138,11 +133,15 @@
                 android:text="@string/rv_odometerHistory_entriesTitle"
                 android:textSize="@dimen/tileTitleFontSize"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_odometerHistory_entries"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/tilePaddingHorizontal"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_odometerHistory_entries"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/tilePaddingHorizontal"/>
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

@@ -17,10 +17,10 @@
     <string name="vehicle_dataTile_vinText">Serie șasiu</string>
     <string name="vehicle_dataTile_odometerText">Odometru</string>
     <string name="vehicle_documentsTile_title">Documente</string>
-    <string name="garage_contextmenu_delete">Sterge vehicul</string>
+    <string name="garage_contextmenu_delete">Șterge vehicul</string>
     <string name="yes">Da</string>
     <string name="no">Nu</string>
-    <string name="garage_deleteVehicleWarningTitle">
+    <string name="delete_WarningTitle">
         Esti sigur?
     </string>
     <string name="garage_deleteVehicleWarningMessage">
@@ -46,4 +46,9 @@
     <string name="rv_odometerHistory_entriesTitle">Intrări</string>
     <string name="chartType_cumulative">cumulativ</string>
     <string name="chartType_growth">creștere</string>
+    <string name="odometerHistory_contextmenu_delete">Șterge intrare</string>
+    <string name="odometerHistory_deleteEntryWarningMessage">
+        Acest proces este ireversibil și presupune stergerea intrării de odometru.
+    </string>
+    <string name="delete_odometerHistoryConfirmation">Intrare ștearsă cu succes.</string>
 </resources>

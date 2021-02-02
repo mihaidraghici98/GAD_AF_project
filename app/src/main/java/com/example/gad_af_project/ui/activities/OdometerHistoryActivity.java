@@ -1,20 +1,30 @@
 package com.example.gad_af_project.ui.activities;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Delete;
 
 import com.anychart.APIlib;
 import com.anychart.AnyChart;
@@ -31,6 +41,7 @@ import com.anychart.enums.Position;
 import com.anychart.enums.TooltipPositionMode;
 import com.example.gad_af_project.R;
 import com.example.gad_af_project.database.AppDatabase;
+import com.example.gad_af_project.vehicles.OdometerAdapter;
 import com.example.gad_af_project.vehicles.OdometerHistory;
 import com.example.gad_af_project.vehicles.Vehicle;
 
@@ -55,23 +66,7 @@ public class OdometerHistoryActivity extends AppCompatActivity implements Adapte
     private final String LOG_TAG = "OdometerHistoryAct_TAG";
     public final static String IKEY_VEHICLE_ID = "com.example.intent.keys.VEHICLE_ID";
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        mRefreshButton.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        Toast.makeText(getApplicationContext(), "Nimic selectat!", Toast.LENGTH_LONG);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if(v == mRefreshButton){
-            refreshChart();
-            mRefreshButton.setVisibility(View.INVISIBLE);
-        }
-    }
+    public boolean isModified;
 
     enum Granularity {
         Day,
@@ -94,6 +89,8 @@ public class OdometerHistoryActivity extends AppCompatActivity implements Adapte
     private Cartesian mLineCartesian;
     private Cartesian mColumnCartesian;
 
+    private RecyclerView mEntriesRV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +103,11 @@ public class OdometerHistoryActivity extends AppCompatActivity implements Adapte
         else {
             mVehicleId = -1;
         }
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        isModified = false;
 
         mPlateNumber = findViewById(R.id.tv_odometerHistory_plateNumber);
 
@@ -143,8 +145,103 @@ public class OdometerHistoryActivity extends AppCompatActivity implements Adapte
         mRefreshButton.setOnClickListener(this);
         mRefreshButton.setVisibility(View.INVISIBLE);
 
+        mEntriesRV = findViewById(R.id.rv_odometerHistory_entries);
+        mEntriesRV.setLayoutManager(new LinearLayoutManager(this));
 
         getData();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        mRefreshButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == mRefreshButton){
+            refreshChart();
+            mRefreshButton.setVisibility(View.INVISIBLE);
+        }
+    }
+
+
+
+    public static class DeleteOdoEntry extends AsyncTask<Void, Void, Void>{
+        private WeakReference<OdometerHistoryActivity> mWeakActivity;
+        private OdometerHistory odometerHistory;
+        public DeleteOdoEntry(OdometerHistory odometerHistory, OdometerHistoryActivity activity){
+            this.mWeakActivity = new WeakReference<>(activity);
+            this.odometerHistory = odometerHistory;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            AppDatabase.getAppDatabase(null).odometerDao().deleteOdometer(odometerHistory);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            mWeakActivity.get().getData();
+            mWeakActivity.get().refreshChart();
+        }
+    }
+    public void onEntryDelete(int id){
+        isModified = true;
+        OdometerHistory odometerHistory = new OdometerHistory();
+        odometerHistory.setEntryId(id);
+
+        DeleteOdoEntry dOE = new DeleteOdoEntry(odometerHistory, this);
+        dOE.execute();
+
+        Toast.makeText(getApplicationContext(), getResources().getString(R.string.delete_odometerHistoryConfirmation), Toast.LENGTH_LONG).show();
+    }
+
+    private void wrapResult(){
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("result", isModified);
+        setResult(Activity.RESULT_OK, returnIntent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        wrapResult();
+        finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                wrapResult();
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == 221) {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.delete_WarningTitle)
+                    .setMessage(R.string.odometerHistory_deleteEntryWarningMessage)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton){
+                            onEntryDelete(item.getGroupId());
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, null).show();
+
+            return true;
+        }
+        return super.onContextItemSelected(item);
     }
 
     @NotNull
@@ -170,11 +267,9 @@ public class OdometerHistoryActivity extends AppCompatActivity implements Adapte
         if(mOdometerHistory == null)
             return;
 
-        Log.v(LOG_TAG, "refreshChart initiated!");
         String granularityString = mSpinnerGranularity.getSelectedItem().toString();
         Granularity granularity = getGranularityEnumFromString(granularityString);
         String type = mSpinnerChartType.getSelectedItem().toString();
-        Log.v(LOG_TAG, "granularityString: " + granularityString + " : " + granularity.toString());
         SimpleDateFormat initialFormatter;
         SimpleDateFormat postFormatter;
         HashMap<String, ArrayList<OdometerHistory>> bucket = new HashMap<>();
@@ -198,13 +293,11 @@ public class OdometerHistoryActivity extends AppCompatActivity implements Adapte
 
 
         for(OdometerHistory oH : mOdometerHistory) {
-            Log.v(LOG_TAG, "Here is an entry of OdometerHistory: " + oH.getValue() + " on " + oH.getDate().toString());
             String date_string = initialFormatter.format(oH.getDate());
             if (!bucket.containsKey(date_string))
                 bucket.put(date_string, new ArrayList<OdometerHistory>());
             bucket.get(date_string).add(oH);
         }
-        Log.v(LOG_TAG, "Bucket: " + bucket.toString());
 
         ArrayList<Pair<Date, Integer>> aggregatedList = new ArrayList<>();
         for (Map.Entry<String, ArrayList<OdometerHistory>> pair : bucket.entrySet()) {
@@ -219,8 +312,6 @@ public class OdometerHistoryActivity extends AppCompatActivity implements Adapte
             aggregatedList.add(new Pair<>(key, value));
         }
 
-        Log.v(LOG_TAG, "aggregatedList: " + aggregatedList.toString());
-
         Collections.sort(aggregatedList, new Comparator<Pair<Date, Integer>>() {
             @Override
             public int compare(Pair<Date, Integer> o1, Pair<Date, Integer> o2) {
@@ -228,14 +319,8 @@ public class OdometerHistoryActivity extends AppCompatActivity implements Adapte
             }
         });
 
-
-        //todo -> parcurge Hashmap si adauga in ArrayList pair<String, aggragetInt>
-        //todo -> asigura ca ordinea e crescatoare
-
-        //todo -> treci mai departe cu generarea chart-ului in functie de Type
-
-        // TODO agregare valori zilnice/saptamanale/lunare/anuale cu buckets
-        // TODO in RecyclerView sa fie grupate dupa granularitatea selectata
+        OdometerAdapter mEntriesAdapter = new OdometerAdapter(bucket, initialFormatter, postFormatter);
+        mEntriesRV.setAdapter(mEntriesAdapter);
 
         List<DataEntry> data = new ArrayList<>();
 
@@ -300,7 +385,6 @@ public class OdometerHistoryActivity extends AppCompatActivity implements Adapte
             mColumnChart.setVisibility(View.VISIBLE);
             APIlib.getInstance().setActiveAnyChartView(mColumnChart);
 
-            Log.v(LOG_TAG, "Crestere");
             int lastValue = 0;
             for(Pair<Date, Integer> pair : aggregatedList){
                 data.add(new ValueDataEntry(postFormatter.format(pair.first).toLowerCase(), pair.second - lastValue));
@@ -380,8 +464,6 @@ public class OdometerHistoryActivity extends AppCompatActivity implements Adapte
             if(vehicle == null)
                 return;
             mWeakActivity.get().setVehicleData(vehicle);
-
-            Toast.makeText(mWeakActivity.get().getApplicationContext(), "I will populate chart", Toast.LENGTH_LONG).show();
 
             mWeakActivity.get().setTextOnPlateNumber(vehicle.getPlateNumberFormatted());
             mWeakActivity.get().refreshChart();

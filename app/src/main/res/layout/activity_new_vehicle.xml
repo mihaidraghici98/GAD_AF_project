@@ -126,7 +126,6 @@
                     android:id="@+id/newVehicle_et_vin"
                     android:layout_width="220dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/blue_200"
                     android:hint="VIN"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -194,7 +193,6 @@
                     android:id="@+id/newVehicle_et_make"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/blue_200"
                     android:hint="Marcă"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -205,7 +203,6 @@
                 android:layout_height="wrap_content"
 
                 app:layout_constraintTop_toBottomOf="@id/newVehicle_characteristicsTitle"
-                app:layout_constraintLeft_toRightOf="@id/newVehicle_make"
                 app:layout_constraintRight_toRightOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -232,7 +229,6 @@
                     android:id="@+id/newVehicle_et_year"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/blue_200"
                     android:inputType="date"
                     android:hint="An"/>
 
@@ -338,7 +334,6 @@
                     android:id="@+id/newVehicle_et_engine"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/blue_200"
                     android:inputType="number"
                     android:hint="Motor (cmc)"/>
 
@@ -351,7 +346,7 @@
 
                 android:layout_marginTop="10dp"
                 app:layout_constraintTop_toBottomOf="@id/newVehicle_fuelTank"
-                app:layout_constraintLeft_toRightOf="@id/newVehicle_engine"
+                app:layout_constraintStart_toStartOf="@id/newVehicle_model"
                 app:layout_constraintRight_toRightOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText

@@ -11,4 +11,5 @@
     <dimen name="tileMarginVertical">10dp</dimen>
     <dimen name="tileTitleFontSize">25sp</dimen>
     <dimen name="tileTextFontSize">15sp</dimen>
+    <dimen name="item_list_odometer">16sp</dimen>
 </resources>
